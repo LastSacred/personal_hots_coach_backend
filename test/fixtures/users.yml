@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  battletag: MyString
+  replay_path: MyString
+  auto_list: false
+
+two:
+  name: MyString
+  battletag: MyString
+  replay_path: MyString
+  auto_list: false
