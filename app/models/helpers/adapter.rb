@@ -1,4 +1,4 @@
-class Import
+class Adapter
 
   @@base_url = 'http://hotsapi.net/api/v1/'
 
@@ -7,8 +7,8 @@ class Import
   #   import_maps
   # end
 
-  def self.maps
-    data = RestClient.get @@base_url + "maps"
+  def self.get(target)
+    data = RestClient.get @@base_url + target
     JSON.parse(data.body)
   end
 
