@@ -4,10 +4,10 @@ one:
   name: MyString
   battletag: MyString
   replay_path: MyString
-  auto_list: false
+  auto_roster: false
 
 two:
   name: MyString
   battletag: MyString
   replay_path: MyString
-  auto_list: false
+  auto_roster: false
