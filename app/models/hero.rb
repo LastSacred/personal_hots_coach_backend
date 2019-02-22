@@ -6,11 +6,15 @@ class Hero < ApplicationRecord
 
   before_validation :format_role
 
+  validates :name, uniqueness: true
+
   def self.import
     Adapter.get("heroes").each do |hero|
-      if !self.find_by(name: hero["name"])
-        self.create(name: hero["name"], role: hero["role"], icon_url: hero["icon_url"]["92x93"])
-      end
+      self.find_or_create_by(
+        name: hero["name"],
+        role: hero["role"],
+        icon_url: hero["icon_url"]["92x93"]
+      )
     end
   end
 
