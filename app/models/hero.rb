@@ -8,7 +8,9 @@ class Hero < ApplicationRecord
 
   def self.import
     Adapter.get("heroes").each do |hero|
-      self.find_or_create_by(name: hero["name"]).update(role: hero["role"])
+      if !self.find_by(name: hero["name"])
+        self.create(name: hero["name"], role: hero["role"], icon_url: hero["icon_url"]["92x93"])
+      end
     end
   end
 
