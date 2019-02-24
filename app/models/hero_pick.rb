@@ -8,7 +8,7 @@ class HeroPick < ApplicationRecord
         hero: Hero.find_by(name: player["hero"]),
         match: match,
         team: player["team"],
-        win: player["winner"] == "true",
+        win: player["winner"],
         picked_by: player["battletag"]
       )
     end

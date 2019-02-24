@@ -13,5 +13,9 @@ class HeroPickTest < ActiveSupport::TestCase
 
     assert_equal precount + 10 , HeroPick.all.count
     assert mal_pick
+    assert_equal mal_player["team"], mal_pick.team
+    assert_equal mal_player["winner"], mal_pick.win
+    assert_equal mal_player["battletag"], mal_pick.picked_by
+    assert_equal match, mal_pick.match
   end
 end
