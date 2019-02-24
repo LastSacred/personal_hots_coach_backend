@@ -53,9 +53,12 @@ class Match < ApplicationRecord
       match.update(
         game_date: data["game_date"],
         game_type: data["game_type"],
-        map: Match.find_by(name: data["game_map"]),
-        hero_picks: HeroPick.match_picks(data["players"])
+        map: Match.find_by(name: data["game_map"])
       )
+
+      HeroPick.match_picks(match, data["players"])
+
+      match.update(complete: true)
     end
   end
 

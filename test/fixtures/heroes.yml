@@ -1,9 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  role: MyString
+Malthael:
+  name: Malthael
+  role: ASSA
 
-two:
-  name: MyString
-  role: MyString
+Gul'dan:
+  name: Gul'dan
+  role: ASSA
+
+Azmodan:
+  name: Azmodan
+  role: SPEC
+
+Mephisto:
+  name: Mephisto
+  role: ASSA
+
+Thrall:
+  name: Thrall
+  role: ASSA
+
+Li Li:
+  name: Li Li
+  role: SUPP
+
+Diablo:
+  name: Diablo
+  role: WARR
+
+Muradin:
+  name: Muradin
+  role: WARR
+
+Artanis:
+  name: Artanis
+  role: WARR
+
+Malfurion:
+  name: Malfurion
+  role: SUPP

@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  winner: 1
   replay_id: 1
   game_date: MyString
   original_path: MyString
@@ -9,7 +8,6 @@ one:
   map: one
 
 two:
-  winner: 1
   replay_id: 1
   game_date: MyString
   original_path: MyString
