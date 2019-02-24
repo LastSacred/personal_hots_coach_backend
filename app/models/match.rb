@@ -5,6 +5,15 @@ class Match < ApplicationRecord
   has_many :user_matches
   has_many :users, through: :user_matches
 
+  before_validation :format_date
+
+  validates :original_path, presence: true
+  with_options if: :is_complete? do |match|
+    match.validates :replay_id, uniqueness: true, presence: true
+    match.validates :game_date, :game_type, :map_id, presence: true
+    match.validates :heroes, length: {is: 10}
+  end
+
   def self.import(replay_path)
     Map.import
     Hero.import
@@ -38,28 +47,35 @@ class Match < ApplicationRecord
 
   def self.incomplete_matches
     self.all.select do |match|
-      !match.game_date || match.replay_id
+      !match.complete && match.replay_id
     end
   end
 
   def self.parse_matches
     self.incomplete_matches.each do |match|
-      next if match.game_date || !match.replay_id
-
       data = Adapter.get("replays/#{match.replay_id}")
-
       next if !data["processed"]
 
       match.update(
         game_date: data["game_date"],
         game_type: data["game_type"],
-        map: Match.find_by(name: data["game_map"])
+        map: Map.find_by(name: data["game_map"])
       )
 
       HeroPick.match_picks(match, data["players"])
 
       match.update(complete: true)
+
+      sleep(1.5)
     end
+  end
+
+  def format_date
+    self.game_date = self.game_date[0..9] if self.game_date
+  end
+
+  def is_complete?
+    self.complete
   end
 
 end

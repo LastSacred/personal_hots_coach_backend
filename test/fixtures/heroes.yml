@@ -1,4 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Do not add Abathur to this file. It will cause a false posative in hero_test.rb
 
 Malthael:
   name: Malthael

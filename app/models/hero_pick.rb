@@ -2,6 +2,9 @@ class HeroPick < ApplicationRecord
   belongs_to :match
   belongs_to :hero
 
+  validates :team, :picked_by, presence: true
+  validates :hero, uniqueness: {scope: :match}
+
   def self.match_picks(match, players)
     players.collect do |player|
       self.create(
