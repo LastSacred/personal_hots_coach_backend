@@ -2,6 +2,7 @@ class Draft
   attr_reader :user, :map, :bans, :with_heroes, :against_heroes
 
   def user=(user)
+    # TODO: change to grab user objects
     @user = user
   end
 
