@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-lastsacred = User.create(name: "LastSacred", battletag: "LastSacred#1265", replay_path: "./test/replays/", auto_roster: false)
+lastsacred = User.create(name: "LastSacred", password: ENV['LSPASSWORD'], battletag: "LastSacred#1265", replay_path: "./test/replays/", auto_roster: false)
 
-Match.import(lastsacred.replay_path)
+Match.import("./test/replays/")
 
 hero_names = [
   "Lúcio",
@@ -33,4 +33,4 @@ heroes = hero_names.collect do |hero_name|
   Hero.find_by(name: hero_name)
 end
 
-lastsacred.update(heroes: heroes)
+# lastsacred.update(heroes: heroes)
