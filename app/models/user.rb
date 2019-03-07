@@ -4,4 +4,7 @@ class User < ApplicationRecord
   has_many :matches, through: :user_matches
   has_many :heroes, through: :roster_listings
   has_secure_password
+
+  validates :name, :battletag, uniqueness: true
+  validates :name, :password, :battletag, presence: true
 end
