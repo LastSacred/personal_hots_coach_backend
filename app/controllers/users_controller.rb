@@ -5,7 +5,7 @@ class UsersController < ApplicationController
      @user = User.new(user_params)
 
     if @user.save
-      render json: @user.to_json, status: :created
+      render json: @user.to_json(except: :password_digest), status: :created
     else
       render json: {errors: @user.errors.full_messages}, status: :conflict
     end
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(user_params)
 
     if @user.save
-      render json: @user.to_json, status: :ok
+      render json: @user.to_json(except: :password_digest), status: :ok
     else
       render json: {errors: @user.errors.full_messages}, status: :conflict
     end
