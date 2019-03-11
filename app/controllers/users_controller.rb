@@ -11,10 +11,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = current_user
+
+    @user.assign_attributes(user_params)
+
+    if @user.save
+      render json: @user.tojason, status: :ok
+    else
+      render json: {errors: @user.errors.full_messages}, status: :conflict
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :battletag, :replay_path)
+    params.require(:user).permit(:name, :password, :battletag, :replay_path, :roster)
   end
 
 end

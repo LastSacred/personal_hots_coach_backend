@@ -29,8 +29,4 @@ hero_names = [
   "Azmodan"
 ]
 
-heroes = hero_names.collect do |hero_name|
-  Hero.find_by(name: hero_name)
-end
-
-# lastsacred.update(heroes: heroes)
+lastsacred.roster = hero_names
