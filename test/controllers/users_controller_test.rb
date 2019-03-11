@@ -4,9 +4,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "create" do
     post users_url, params: {
       "user": {
-        "name":  "BobRoss",
+        "name":  "BobRoss2",
         "password": "happytrees",
-        "battletag": "BobRoss#9999"
+        "battletag": "BobRoss#9992"
       }
     }
 

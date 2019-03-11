@@ -1,10 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  battletag: MyString
-  replay_path: MyString
+BobRoss:
+  name: BobRoss
+  battletag: BobRoss#9999
+  replay_path: /replaypath
   auto_roster: false
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
 
 two:
   name: MyString
