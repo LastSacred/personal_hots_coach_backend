@@ -4,8 +4,9 @@ class DraftTest < ActiveSupport::TestCase
   test ".initialize" do
     alt = Map.find_by(name: "Alterac Pass")
     draft = Draft.new(@@stub_draft_props)
+    draft.user = User.first
 
-    assert_equal "LastSacred", draft.user
+    assert draft.user
     assert_equal alt, draft.map
     assert_equal 4, draft.bans.count
     assert_equal 2, draft.with_heroes.count
