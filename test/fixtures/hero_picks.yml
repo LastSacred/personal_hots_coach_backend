@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  picked_by: MyString
-  team: 1
-  match: one
-  hero: one
+pick01:
+  picked_by: BobRoss#9999
+  team: 0
+  match: match01
+  hero: Li Li
 
 two:
   picked_by: MyString

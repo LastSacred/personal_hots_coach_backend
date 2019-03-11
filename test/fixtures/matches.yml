@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  replay_id: 1
-  game_date: MyString
-  original_path: MyString
-  game_type: MyString
-  map: one
+match01:
+  replay_id: 2
+  game_date: 2019-01-28
+  original_path: ./test/replays/Battlefield of Eternity (-1).StormReplay
+  game_type: HeroLeague
+  map: alterac
 
 two:
   replay_id: 1
