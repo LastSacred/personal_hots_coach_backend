@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :drafts, only: [:create]
 
   resources :maps, only: [:index]
+
+  resources :heroes, only: [:index]
 end
