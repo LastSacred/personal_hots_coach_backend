@@ -1,10 +1,6 @@
 class Draft
-  attr_reader :user, :map, :bans, :with_heroes, :against_heroes
-
-  def user=(user)
-    # TODO: change to grab user objects
-    @user = user
-  end
+  attr_reader :user, :map, :bans, :with_heroes, :against_heroes, :pick_list
+  attr_writer :user, :pick_list
 
   def map=(map)
     @map = Map.find_by(name: map)
@@ -29,11 +25,11 @@ class Draft
   end
 
   def initialize(props={})
-    self.user = props[:user]
     self.map = props[:map]
     self.bans = props[:bans]
     self.with_heroes = props[:with_heroes]
     self.against_heroes = props[:against_heroes]
+    self.pick_list = 'hi'
   end
 
 end
