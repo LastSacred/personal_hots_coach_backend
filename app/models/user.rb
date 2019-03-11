@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :name, :battletag, uniqueness: true
-  validates :name, :password, :battletag, presence: true
+  validates :name, :password_digest, :battletag, presence: true
 
   def roster=(hero_names)
     self.heroes = hero_names.map do |hero_name|

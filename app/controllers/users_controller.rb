@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(user_params)
 
     if @user.save
-      render json: @user.tojason, status: :ok
+      render json: @user.to_json, status: :ok
     else
       render json: {errors: @user.errors.full_messages}, status: :conflict
     end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :battletag, :replay_path, :roster)
+    params.require(:user).permit(:name, :password, :battletag, :replay_path, roster: [])
   end
 
 end
