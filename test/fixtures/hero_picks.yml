@@ -4,10 +4,45 @@ pick01:
   picked_by: BobRoss#9999
   team: 0
   match: match01
-  hero: Li Li
+  hero: LiLi
 
 pick02:
   picked_by: BobRoss#9999
   team: 0
   match: match02
-  hero: Li Li
+  hero: LiLi
+
+starpick01:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch01
+  hero: LiLi
+  win: true
+
+starpick02:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch02
+  hero: LiLi
+  win: true
+
+starpick03:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch03
+  hero: LiLi
+  win: true
+
+starpick04:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch04
+  hero: LiLi
+  win: true
+
+starpick05:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch05
+  hero: LiLi
+  win: true

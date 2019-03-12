@@ -42,4 +42,11 @@ class UserTest < ActiveSupport::TestCase
     assert bob.roster.find{ |hero| hero.name == "Li Li" }
   end
 
+  test ".score ashero" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+
+    assert_equal 550, star.score(ashero: lili)
+  end
+
 end

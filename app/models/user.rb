@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def matches
     Match.all.select do |match|
-      match.hero_picks.find { |hero_pick| hero_pick.picked_by == self.battletag }
+      my_pick(match)
     end
   end
 
@@ -34,7 +34,27 @@ class User < ApplicationRecord
     return self.heroes
   end
 
+  def score(**params)
+    matches = self.tracked_matches.select do |match|
+      my_pick(match).hero == params[:ashero]
+    end
+
+    scores = matches.collect do |match|
+      my_pick(match).win ? 1000 : 0
+    end
+
+    while scores.count < 50 do
+      scores << 500
+    end
+
+    scores.sum / scores.count
+  end
+
   private
+
+  def my_pick(match)
+    match.hero_picks.find{ |hero_pick| hero_pick.picked_by == self.battletag }
+  end
 
   def auto_heroes
     self.tracked_matches.collect do |match|

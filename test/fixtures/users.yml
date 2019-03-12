@@ -7,8 +7,9 @@ BobRoss:
   auto_roster: false
   password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
 
-two:
-  name: MyString
-  battletag: MyString
-  replay_path: MyString
-  auto_roster: false
+DavidBowie:
+  name: StarMan
+  battletag: StarMan#0000
+  replay_path: /replaypath
+  auto_roster: true
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS

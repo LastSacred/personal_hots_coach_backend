@@ -3,7 +3,7 @@
 match01:
   replay_id: 2
   game_date: "2019-01-28"
-  original_path: ./test/replays/Battlefield of Eternity (-1).StormReplay
+  original_path: ./test/replays/Battlefield of Eternity (-01).StormReplay
   game_type: HeroLeague
   map: alterac
   complete: true
@@ -11,7 +11,47 @@ match01:
 match02:
   replay_id: 3
   game_date: "2018-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-02).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+starmatch01:
+  replay_id: 1
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-1).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+starmatch02:
+  replay_id: 2
+  game_date: "2019-01-28"
   original_path: ./test/replays/Battlefield of Eternity (-2).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+starmatch03:
+  replay_id: 3
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-3).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+starmatch04:
+  replay_id: 4
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-4).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+starmatch05:
+  replay_id: 5
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-5).StormReplay
   game_type: HeroLeague
   map: alterac
   complete: true
