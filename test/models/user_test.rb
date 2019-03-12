@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  # test "diablo" do
+  #   star = users :DavidBowie
+  #   lili = heroes :LiLi
+  #   diab = heroes :Diablo
+  #
+  #   assert_equal 0, star.score(as_hero: lili, against_hero: diab)
+  # end
+
   test "#roster=" do
     hero_names = [
       "Malthael",
@@ -81,6 +89,39 @@ class UserTest < ActiveSupport::TestCase
     alterac = maps :alterac
 
     assert_equal 871, star.score(as_hero: lili, against_hero: meph, map: alterac)
+  end
+
+  test "#score draft start" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+    alterac = maps :alterac
+
+    draft = {
+      map: alterac,
+      with_heroes: [],
+      against_heroes: []
+    }
+
+    assert_equal 770, star.score(as_hero: lili, draft: draft)
+  end
+
+  test "#score draft later" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+    alterac = maps :alterac
+    thrall = heroes :Thrall
+    malf = heroes :Malfurion
+    art = heroes :Artanis
+    meph = heroes :Mephisto
+    diab = heroes :Diablo
+
+    draft = {
+      map: alterac,
+      with_heroes: [art, malf],
+      against_heroes: [diab, meph, thrall]
+    }
+
+    assert_equal 709, star.score(as_hero: lili, draft: draft)
   end
 
 end

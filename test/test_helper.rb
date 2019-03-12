@@ -16,4 +16,5 @@ class ActiveSupport::TestCase
     with_heroes: ["Thrall", "Li Li"],
     against_heroes: ["Diablo", "Muradin", "Artanis"]
   }
+
 end

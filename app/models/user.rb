@@ -35,16 +35,31 @@ class User < ApplicationRecord
   end
 
   def score(**params)
-    matches = matches_as(params[:as_hero])
+    matches = matches_as(params[:as_hero]) unless params[:draft]
     matches = filter_by_map(matches, params[:map]) if params[:map]
     matches = filter_by_hero(matches, :with, params[:with_hero]) if params[:with_hero]
     matches = filter_by_hero(matches, :against, params[:against_hero]) if params[:against_hero]
 
-    scores = matches.collect do |match|
-      my_pick(match).win ? 1000 : 0
+    if params[:draft]
+      scores = []
+
+      params[:draft][:with_heroes].each do |hero|
+        scores << self.score(as_hero: params[:as_hero], with_hero: hero, map: params[:draft][:map])
+      end
+
+      params[:draft][:against_heroes].each do |hero|
+        scores << self.score(as_hero: params[:as_hero], against_hero: hero, map: params[:draft][:map])
+      end
+    else
+      scores = matches.collect do |match|
+        my_pick(match).win ? 1000 : 0
+      end
     end
 
-    if params[:map] && (params[:with_hero] || params[:against_hero])
+    if params[:draft]
+      min = 8
+      fill = self.score(as_hero: params[:as_hero], map: params[:draft][:map])
+    elsif params[:map] && (params[:with_hero] || params[:against_hero])
       min = 5
       fill = self.score(as_hero: params[:as_hero], with_hero: params[:with_hero]) if params[:with_hero]
       fill = self.score(as_hero: params[:as_hero], against_hero: params[:against_hero]) if params[:against_hero]
@@ -59,7 +74,7 @@ class User < ApplicationRecord
     while scores.count < min
       scores << fill
     end
-    # byebug
+
     scores.sum / scores.count
   end
 
@@ -81,8 +96,10 @@ class User < ApplicationRecord
     matches.select do |match|
       match.hero_picks.find do |hero_pick|
         hero_pick.hero == hero &&
-        (relationship == :with && hero_pick.team == my_team(match)) ||
-        (relationship == :against && hero_pick.team != my_team(match))
+        (
+          (relationship == :with && hero_pick.team == my_team(match)) ||
+          (relationship == :against && hero_pick.team != my_team(match))
+        )
       end
     end
   end
