@@ -17,12 +17,16 @@ class UserTest < ActiveSupport::TestCase
   test ".matches" do
     bob = users :BobRoss
 
-    assert_equal 1, bob.matches.count
+    assert_equal 2, bob.matches.count
   end
 
-  # test ".matches" do
-  #   bob = users :BobRoss
-  #
-  #   assert_equal 1, bob.matches.count
-  # end
+  test ".tracked_matches" do
+    bob = users :BobRoss
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 1, bob.tracked_matches.count
+    end
+  end
+
 end

@@ -6,8 +6,8 @@ pick01:
   match: match01
   hero: Li Li
 
-two:
-  picked_by: MyString
-  team: 1
-  match: two
-  hero: two
+pick02:
+  picked_by: BobRoss#9999
+  team: 0
+  match: match02
+  hero: Li Li
