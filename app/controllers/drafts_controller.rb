@@ -4,6 +4,7 @@ class DraftsController < ApplicationController
   def create
     @draft = Draft.new(draft_params)
     @draft.user = current_user
+    @draft.set_pick_list
     # FIXME: unable to send only picklist
     render json: @draft.to_json, status: :ok
   end

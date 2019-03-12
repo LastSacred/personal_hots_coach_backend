@@ -1,6 +1,6 @@
 class Draft
   attr_reader :user, :map, :bans, :with_heroes, :against_heroes, :pick_list
-  attr_writer :user, :pick_list
+  attr_writer :user
 
   def map=(map)
     @map = Map.find_by(name: map)
@@ -24,53 +24,20 @@ class Draft
     end
   end
 
-  def initialize(**props)
+  def initialize(props={})
     self.map = props[:map]
     self.bans = props[:bans]
     self.with_heroes = props[:with_heroes]
     self.against_heroes = props[:against_heroes]
-    # self.pick_list = 'hi'
   end
+  # TODO: write test for set_pick_list
+  def set_pick_list
+    draft = {map: @map, with_heroes: @with_heroes, against_heroes: @against_heroes}
 
-  # def set_pick_list
-  #   scored_list = @user.roster.collect do |hero|
-  #     {hero: hero, score: total_score(hero)}
-  #   end
-  #
-  #   self.pick_list = scored_list.sort_by { |obj| obj.score }.reverse
-  # end
+    list = @user.roster.collect do |hero|
+      {hero: hero, score: @user.score(as_hero: hero, draft: draft)}
+    end
 
-  # def total_score(as_hero)
-  #   scores = scores_including_heroes_on_map(as_hero)
-  #
-  #   while scores.count < 8 do
-  #     scores << score_on_map(as_hero)
-  #   end
-  #
-  #   scores.sum / scores.count
-  # end
-  #
-  # def scores_including_heroes_on_map(as_hero)
-  #   scores = []
-  #
-  #   @with_heroes.each do |otherhero|
-  #     scores << score_on_map_including_hero_as_hero(otherhero, as_hero, true)
-  #   end
-  #
-  #   @agains_theroes.each do |otherhero|
-  #     scores << score_on_map_including_hero_as_hero(otherhero, as_hero, false)
-  #   end
-  #
-  #   scores
-  # end
-  #
-  # def score_including_hero_on_map(otherhero, as_hero, teammate)
-  #   scores = @user.matches_including_hero_on_map
-  #
-  #   while scores.length < 5
-  #     scores << score_including_hero(otherhero, as_hero, teammate)
-  #   end
-  #
-  #   score.sum / score.count
-  # end
+    @pick_list = list.sort_by { |obj| obj[:score] }.reverse
+  end
 end

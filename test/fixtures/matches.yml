@@ -63,3 +63,11 @@ starmatch06:
   game_type: HeroLeague
   map: dragon
   complete: true
+
+empty:
+  replay_id: 7
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-07).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true

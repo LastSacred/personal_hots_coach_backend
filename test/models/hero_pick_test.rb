@@ -5,7 +5,7 @@ class HeroPickTest < ActiveSupport::TestCase
     precount = HeroPick.all.count
     players = @@match["players"]
     mal_player = players.find { |player| player["hero"] == "Malthael" }
-    match = Match.all.first
+    match = matches :empty
 
     HeroPick.match_picks(match, players)
 
