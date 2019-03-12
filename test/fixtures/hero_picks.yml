@@ -19,11 +19,25 @@ starpick01:
   hero: LiLi
   win: true
 
+friendpick01:
+  picked_by: Friend#0001
+  team: 0
+  match: starmatch01
+  hero: Artanis
+  win: true
+
 starpick02:
   picked_by: StarMan#0000
   team: 0
   match: starmatch02
   hero: LiLi
+  win: true
+
+friendpick02:
+  picked_by: Friend#0001
+  team: 0
+  match: starmatch02
+  hero: Artanis
   win: true
 
 starpick03:
@@ -33,6 +47,20 @@ starpick03:
   hero: LiLi
   win: true
 
+friendpick03:
+  picked_by: Friend#0001
+  team: 0
+  match: starmatch03
+  hero: Artanis
+  win: true
+
+foepick03:
+  picked_by: Foe#0002
+  team: 1
+  match: starmatch03
+  hero: Mephisto
+  win: false
+
 starpick04:
   picked_by: StarMan#0000
   team: 0
@@ -40,9 +68,23 @@ starpick04:
   hero: LiLi
   win: true
 
+foepick04:
+  picked_by: Foe#0002
+  team: 1
+  match: starmatch04
+  hero: Mephisto
+  win: false
+
 starpick05:
   picked_by: StarMan#0000
   team: 0
   match: starmatch05
   hero: LiLi
   win: true
+
+foepick05:
+  picked_by: Foe#0002
+  team: 1
+  match: starmatch05
+  hero: Mephisto
+  win: false

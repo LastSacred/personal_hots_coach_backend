@@ -13,3 +13,17 @@ DavidBowie:
   replay_path: /replaypath
   auto_roster: true
   password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
+
+friend:
+  name: Friend
+  battletag: Friend#0001
+  replay_path: /replaypath
+  auto_roster: true
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
+
+foe:
+  name: Foe
+  battletag: Foe#0002
+  replay_path: /replaypath
+  auto_roster: true
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS

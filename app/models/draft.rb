@@ -40,35 +40,35 @@ class Draft
   #   self.pick_list = scored_list.sort_by { |obj| obj.score }.reverse
   # end
 
-  # def total_score(ashero)
-  #   scores = scores_including_heroes_on_map(ashero)
+  # def total_score(as_hero)
+  #   scores = scores_including_heroes_on_map(as_hero)
   #
   #   while scores.count < 8 do
-  #     scores << score_on_map(ashero)
+  #     scores << score_on_map(as_hero)
   #   end
   #
   #   scores.sum / scores.count
   # end
   #
-  # def scores_including_heroes_on_map(ashero)
+  # def scores_including_heroes_on_map(as_hero)
   #   scores = []
   #
   #   @with_heroes.each do |otherhero|
-  #     scores << score_on_map_including_hero_as_hero(otherhero, ashero, true)
+  #     scores << score_on_map_including_hero_as_hero(otherhero, as_hero, true)
   #   end
   #
   #   @agains_theroes.each do |otherhero|
-  #     scores << score_on_map_including_hero_as_hero(otherhero, ashero, false)
+  #     scores << score_on_map_including_hero_as_hero(otherhero, as_hero, false)
   #   end
   #
   #   scores
   # end
   #
-  # def score_including_hero_on_map(otherhero, ashero, teammate)
+  # def score_including_hero_on_map(otherhero, as_hero, teammate)
   #   scores = @user.matches_including_hero_on_map
   #
   #   while scores.length < 5
-  #     scores << score_including_hero(otherhero, ashero, teammate)
+  #     scores << score_including_hero(otherhero, as_hero, teammate)
   #   end
   #
   #   score.sum / score.count

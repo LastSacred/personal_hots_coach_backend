@@ -36,21 +36,46 @@ class User < ApplicationRecord
 
   def score(**params)
     matches = self.tracked_matches.select do |match|
-      my_pick(match).hero == params[:ashero]
+      my_pick(match).hero == params[:as_hero]
     end
+
+    matches = matches_including_hero(:with, matches, params[:with_hero]) if params[:with_hero]
+    matches = matches_including_hero(:against, matches, params[:against_hero]) if params[:against_hero]
 
     scores = matches.collect do |match|
       my_pick(match).win ? 1000 : 0
     end
 
-    while scores.count < 50 do
-      scores << 500
+    if params[:with_hero] || params[:against_hero]
+      min = 10
+      fill = self.score(as_hero: params[:as_hero])
+    else
+      min = 50
+      fill = 500
     end
 
+    while scores.count < min
+      scores << fill
+    end
+    # byebug
     scores.sum / scores.count
   end
 
   private
+
+  def matches_including_hero(relationship, matches, hero)
+    matches.select do |match|
+      match.hero_picks.find do |hero_pick|
+        hero_pick.hero == hero &&
+        (relationship == :with && hero_pick.team == my_team(match)) ||
+        (relationship == :against && hero_pick.team != my_team(match))
+      end
+    end
+  end
+
+  def my_team(match)
+    my_pick(match).team
+  end
 
   def my_pick(match)
     match.hero_picks.find{ |hero_pick| hero_pick.picked_by == self.battletag }
