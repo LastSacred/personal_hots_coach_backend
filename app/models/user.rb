@@ -45,7 +45,9 @@ class User < ApplicationRecord
     end
 
     if params[:map] && (params[:with_hero] || params[:against_hero])
-      return
+      min = 5
+      fill = self.score(as_hero: params[:as_hero], with_hero: params[:with_hero]) if params[:with_hero]
+      fill = self.score(as_hero: params[:as_hero], against_hero: params[:against_hero]) if params[:against_hero]
     elsif params[:map] || params[:with_hero] || params[:against_hero]
       min = 10
       fill = self.score(as_hero: params[:as_hero])

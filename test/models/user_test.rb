@@ -65,4 +65,22 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 770, star.score(as_hero: lili, map: alterac)
   end
 
+  test "#score as_hero on_map with_hero" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+    art = heroes :Artanis
+    alterac = maps :alterac
+
+    assert_equal 871, star.score(as_hero: lili, with_hero: art, map: alterac)
+  end
+
+  test "#score as_hero on_map against_hero" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+    meph = heroes :Mephisto
+    alterac = maps :alterac
+
+    assert_equal 871, star.score(as_hero: lili, against_hero: meph, map: alterac)
+  end
+
 end
