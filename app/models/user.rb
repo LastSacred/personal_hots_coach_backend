@@ -35,18 +35,18 @@ class User < ApplicationRecord
   end
 
   def score(**params)
-    matches = self.tracked_matches.select do |match|
-      my_pick(match).hero == params[:as_hero]
-    end
-
-    matches = matches_including_hero(:with, matches, params[:with_hero]) if params[:with_hero]
-    matches = matches_including_hero(:against, matches, params[:against_hero]) if params[:against_hero]
+    matches = matches_as(params[:as_hero])
+    matches = filter_by_map(matches, params[:map]) if params[:map]
+    matches = filter_by_hero(matches, :with, params[:with_hero]) if params[:with_hero]
+    matches = filter_by_hero(matches, :against, params[:against_hero]) if params[:against_hero]
 
     scores = matches.collect do |match|
       my_pick(match).win ? 1000 : 0
     end
 
-    if params[:with_hero] || params[:against_hero]
+    if params[:map] && (params[:with_hero] || params[:against_hero])
+      return
+    elsif params[:map] || params[:with_hero] || params[:against_hero]
       min = 10
       fill = self.score(as_hero: params[:as_hero])
     else
@@ -63,7 +63,19 @@ class User < ApplicationRecord
 
   private
 
-  def matches_including_hero(relationship, matches, hero)
+  def matches_as(hero)
+    self.tracked_matches.select do |match|
+      my_pick(match).hero == hero
+    end
+  end
+
+  def filter_by_map(matches, map)
+    matches.select do |match|
+      match.map == map
+    end
+  end
+
+  def filter_by_hero(matches, relationship, hero)
     matches.select do |match|
       match.hero_picks.find do |hero_pick|
         hero_pick.hero == hero &&

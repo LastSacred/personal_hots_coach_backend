@@ -46,7 +46,7 @@ class UserTest < ActiveSupport::TestCase
     star = users :DavidBowie
     lili = heroes :LiLi
 
-    assert_equal 550, star.score(as_hero: lili)
+    assert_equal 540, star.score(as_hero: lili)
   end
 
   test "#score as_hero with_hero" do
@@ -54,15 +54,15 @@ class UserTest < ActiveSupport::TestCase
     lili = heroes :LiLi
     art = heroes :Artanis
 
-    assert_equal 685, star.score(as_hero: lili, with_hero: art)
+    assert_equal 678, star.score(as_hero: lili, with_hero: art)
   end
 
-  test "#score as_hero against_hero" do
+  test "#score as_hero on_map" do
     star = users :DavidBowie
     lili = heroes :LiLi
-    meph = heroes :Mephisto
+    alterac = maps :alterac
 
-    assert_equal 685, star.score(as_hero: lili, against_hero: meph)
+    assert_equal 770, star.score(as_hero: lili, map: alterac)
   end
 
 end

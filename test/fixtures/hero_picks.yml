@@ -88,3 +88,10 @@ foepick05:
   match: starmatch05
   hero: Mephisto
   win: false
+
+starpick06:
+  picked_by: StarMan#0000
+  team: 0
+  match: starmatch06
+  hero: LiLi
+  win: false
