@@ -2,9 +2,9 @@ require 'test_helper'
 
 class DraftTest < ActiveSupport::TestCase
   test ".initialize" do
-    alt = Map.find_by(name: "Alterac Pass")
-    draft = Draft.new(@@stub_draft_props)
-    draft.user = User.first
+    alt = maps :alterac
+    draft = Draft.new(@@draft_props)
+    draft.user = users :BobRoss
 
     assert draft.user
     assert_equal alt, draft.map

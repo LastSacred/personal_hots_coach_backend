@@ -20,7 +20,11 @@ class User < ApplicationRecord
     end
   end
 
-  def tracked_matched
-    self.matches
+  def tracked_matches
+    self.matches.select do |match|
+      match.complete &&
+      match.game_type == "HeroLeague" &&
+      match.game_date >= (Date.today - 90).strftime("%Y-%m-%d")
+    end
   end
 end

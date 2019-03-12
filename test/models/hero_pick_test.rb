@@ -3,7 +3,7 @@ require 'test_helper'
 class HeroPickTest < ActiveSupport::TestCase
   test ".match_picks" do
     precount = HeroPick.all.count
-    players = @@stub_match["players"]
+    players = @@match["players"]
     mal_player = players.find { |player| player["hero"] == "Malthael" }
     match = Match.all.first
 

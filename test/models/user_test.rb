@@ -8,15 +8,21 @@ class UserTest < ActiveSupport::TestCase
       "Azmodan"
     ]
 
-    bob = User.find_by(name: "BobRoss")
+    bob = users :BobRoss
     bob.roster = hero_names
 
     assert_equal hero_names.count, bob.heroes.count
   end
 
   test ".matches" do
-    bob = User.find_by(name: "BobRoss")
+    bob = users :BobRoss
 
     assert_equal 1, bob.matches.count
   end
+
+  # test ".matches" do
+  #   bob = users :BobRoss
+  #
+  #   assert_equal 1, bob.matches.count
+  # end
 end
