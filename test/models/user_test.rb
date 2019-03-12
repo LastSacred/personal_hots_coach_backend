@@ -29,4 +29,17 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test ".roster manual" do
+    bob = users :BobRoss
+
+    assert_equal 2, bob.roster.count
+  end
+
+  test ".roster auto" do
+    bob = users :BobRoss
+    bob.auto_roster = true
+
+    assert bob.roster.find{ |hero| hero.name == "Li Li" }
+  end
+
 end

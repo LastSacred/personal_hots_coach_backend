@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  hero: one
+bobazmo:
+  user: BobRoss
+  hero: Azmodan
 
-two:
-  user: two
-  hero: two
+bobmalthael:
+  user: BobRoss
+  hero: Malthael
