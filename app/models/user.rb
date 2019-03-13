@@ -78,6 +78,14 @@ class User < ApplicationRecord
     scores.sum / scores.count
   end
 
+  def pick_list(draft)
+    list = self.roster.collect do |hero|
+      {hero: hero, score: self.score(as_hero: hero, draft: draft)}
+    end
+
+    list.sort_by { |obj| obj[:score] }.reverse
+  end
+
   private
 
   def matches_as(hero)
@@ -113,13 +121,15 @@ class User < ApplicationRecord
   end
 
   def auto_heroes
-    self.tracked_matches.collect do |match|
+    roster = self.tracked_matches.collect do |match|
       hero_pick = match.hero_picks.find do |hero_pick|
         hero_pick.picked_by == self.battletag
       end
 
       hero_pick.hero
     end
+
+    roster.uniq
   end
 
 end

@@ -17,4 +17,11 @@ class ActiveSupport::TestCase
     against_heroes: ["Diablo", "Muradin", "Artanis"]
   }
 
+  @@star_draft_props = {
+    map: "Alterac Pass",
+    bans: ["Malthael", "Gul'dan", "Azmodan", "Muradin"],
+    with_heroes: ["Artanis", "Malfurion"],
+    against_heroes: ["Diablo", "Mephisto", "Thrall"]
+  }
+
 end

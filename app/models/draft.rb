@@ -30,14 +30,14 @@ class Draft
     self.with_heroes = props[:with_heroes]
     self.against_heroes = props[:against_heroes]
   end
-  # TODO: write test for set_pick_list
+
   def set_pick_list
-    draft = {map: @map, with_heroes: @with_heroes, against_heroes: @against_heroes}
-
-    list = @user.roster.collect do |hero|
-      {hero: hero, score: @user.score(as_hero: hero, draft: draft)}
-    end
-
-    @pick_list = list.sort_by { |obj| obj[:score] }.reverse
+    @pick_list = @user.pick_list(
+      {
+        map: @map,
+        with_heroes: @with_heroes,
+        against_heroes: @against_heroes
+      }
+    )
   end
 end

@@ -48,6 +48,7 @@ class UserTest < ActiveSupport::TestCase
     bob.auto_roster = true
 
     assert bob.roster.find{ |hero| hero.name == "Li Li" }
+    assert_equal 1, bob.roster.count
   end
 
   test "#score as_hero" do
@@ -122,6 +123,29 @@ class UserTest < ActiveSupport::TestCase
     }
 
     assert_equal 709, star.score(as_hero: lili, draft: draft)
+  end
+
+  test "#pick_list" do
+    star = users :DavidBowie
+    lili = heroes :LiLi
+    alterac = maps :alterac
+    thrall = heroes :Thrall
+    malf = heroes :Malfurion
+    art = heroes :Artanis
+    meph = heroes :Mephisto
+    diab = heroes :Diablo
+
+    draft = {
+      map: alterac,
+      with_heroes: [art, malf],
+      against_heroes: [diab, meph, thrall]
+    }
+
+    pick_list = star.pick_list(draft)
+    
+    assert_equal 1, pick_list.count
+    assert_equal lili, pick_list.first[:hero]
+    assert_equal 709, pick_list.first[:score]
   end
 
 end
