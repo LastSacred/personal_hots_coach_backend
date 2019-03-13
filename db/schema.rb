@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_191625) do
+ActiveRecord::Schema.define(version: 2019_03_13_130342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,15 +62,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_191625) do
     t.index ["user_id"], name: "index_roster_listings_on_user_id"
   end
 
-  create_table "user_matches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "match_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["match_id"], name: "index_user_matches_on_match_id"
-    t.index ["user_id"], name: "index_user_matches_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "battletag"
@@ -86,6 +77,4 @@ ActiveRecord::Schema.define(version: 2019_03_06_191625) do
   add_foreign_key "matches", "maps"
   add_foreign_key "roster_listings", "heroes"
   add_foreign_key "roster_listings", "users"
-  add_foreign_key "user_matches", "matches"
-  add_foreign_key "user_matches", "users"
 end
