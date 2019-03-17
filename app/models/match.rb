@@ -6,9 +6,9 @@ class Match < ApplicationRecord
   before_validation :format_date
 
   validates :original_path, presence: true
+  validates :replay_id, uniqueness: true, allow_nil: true
   with_options if: :is_complete? do |match|
-    match.validates :replay_id, uniqueness: true, presence: true
-    match.validates :game_date, :game_type, :map_id, presence: true
+    match.validates :replay_id, :game_date, :game_type, :map_id, presence: true
     match.validates :heroes, length: {is: 10}
   end
 
@@ -19,7 +19,7 @@ class Match < ApplicationRecord
 
     count = 0
 
-    while self.incomplete_matches.present? && count <= 5
+    while self.incomplete.present? && count < 3
       self.parse_matches
       count += 1
     end
@@ -43,20 +43,21 @@ class Match < ApplicationRecord
 
   private
 
-  def self.incomplete_matches
+  def self.incomplete
     self.all.select do |match|
       !match.complete && match.replay_id
     end
   end
 
   def self.parse_matches
-    self.incomplete_matches.each do |match|
+    self.incomplete.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
-      if !data["processed"]
-        puts "skipping #{match.replay_id}"
-        sleep (1.5)
-        next
-      end
+      ## I will put this back in if there are any errors caused by incomplete replays
+      # if !data["processed"]
+      #   puts "skipping #{match.replay_id}"
+      #   sleep (1.5)
+      #   next
+      # end
 
       match.update(
         game_date: data["game_date"],
@@ -66,10 +67,12 @@ class Match < ApplicationRecord
 
       HeroPick.match_picks(match, data["players"])
 
-      match.update(complete: true)
+      (data["processed"]) ? (match.update(complete: true)) : (puts "check #{match.replay_id}")
 
-      puts "processed #{match.replay_id} #{match.complete}"
-
+      if match.errors.full_messages.present?
+        puts match.errors.full_messages
+        byebug
+      end
       sleep(1.5)
     end
   end

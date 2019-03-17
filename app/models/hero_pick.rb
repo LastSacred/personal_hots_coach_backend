@@ -3,9 +3,10 @@ class HeroPick < ApplicationRecord
   belongs_to :hero
 
   validates :team, :picked_by, presence: true
-  validates :hero, uniqueness: {scope: :match}
 
   def self.match_picks(match, players)
+    match.hero_picks.each { |hero_pick| hero_pick.delete }
+
     players.collect do |player|
       self.create(
         hero: Hero.find_by(name: player["hero"]),
