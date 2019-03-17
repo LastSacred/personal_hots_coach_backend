@@ -87,7 +87,9 @@ class User < ApplicationRecord
   private
 
   def matches_as(hero)
-    self.tracked_matches.select do |match|
+    @tracked_matches = @tracked_matches || self.tracked_matches
+
+    @tracked_matches.select do |match|
       my_pick(match).hero == hero
     end
   end

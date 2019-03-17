@@ -52,7 +52,11 @@ class Match < ApplicationRecord
   def self.parse_matches
     self.incomplete_matches.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
-      next if !data["processed"]
+      if !data["processed"]
+        puts "skipping #{match.replay_id}"
+        sleep (1.5)
+        next
+      end
 
       match.update(
         game_date: data["game_date"],
@@ -63,6 +67,8 @@ class Match < ApplicationRecord
       HeroPick.match_picks(match, data["players"])
 
       match.update(complete: true)
+
+      puts "processed #{match.replay_id} #{match.complete}"
 
       sleep(1.5)
     end
