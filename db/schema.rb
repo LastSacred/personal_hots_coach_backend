@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_130342) do
+ActiveRecord::Schema.define(version: 2019_03_18_191830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2019_03_13_130342) do
     t.index ["map_id"], name: "index_matches_on_map_id"
   end
 
+  create_table "replay_files", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.bigint "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_replay_files_on_match_id"
+    t.index ["user_id"], name: "index_replay_files_on_user_id"
+  end
+
   create_table "roster_listings", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "hero_id"
@@ -75,6 +85,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_130342) do
   add_foreign_key "hero_picks", "heroes"
   add_foreign_key "hero_picks", "matches"
   add_foreign_key "matches", "maps"
+  add_foreign_key "replay_files", "matches"
+  add_foreign_key "replay_files", "users"
   add_foreign_key "roster_listings", "heroes"
   add_foreign_key "roster_listings", "users"
 end

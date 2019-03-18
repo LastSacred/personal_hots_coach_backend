@@ -2,10 +2,11 @@ class Match < ApplicationRecord
   belongs_to :map, optional: true
   has_many :hero_picks
   has_many :heroes, through: :hero_picks
+  has_many :replay_files
+  has_many :users, through: :replay_files
 
   before_validation :format_date
 
-  validates :original_path, presence: true
   validates :replay_id, uniqueness: true, allow_nil: true
   with_options if: :is_complete? do |match|
     match.validates :replay_id, :game_date, :game_type, :map_id, presence: true

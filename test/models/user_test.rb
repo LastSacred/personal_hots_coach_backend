@@ -22,10 +22,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal hero_names.count, bob.heroes.count
   end
 
-  test "#matches" do
+  test "#my_matches" do
     bob = users :BobRoss
 
-    assert_equal 2, bob.matches.count
+    assert_equal 2, bob.my_matches.count
   end
 
   test "#tracked_matches" do
@@ -142,7 +142,7 @@ class UserTest < ActiveSupport::TestCase
     }
 
     pick_list = star.pick_list(draft)
-    
+
     assert_equal 1, pick_list.count
     assert_equal lili, pick_list.first[:hero]
     assert_equal 709, pick_list.first[:score]

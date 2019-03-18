@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :roster_listings
   has_many :heroes, through: :roster_listings
+  has_many :replay_files
+  has_many :matches, through: :replay_files
   has_secure_password
 
   validates :name, :battletag, uniqueness: true
@@ -12,7 +14,7 @@ class User < ApplicationRecord
     end
   end
 
-  def matches
+  def my_matches
     Match.all.select do |match|
       my_pick(match)
     end
@@ -20,7 +22,7 @@ class User < ApplicationRecord
 
   def tracked_matches
     # assigning tracked_matches to an instance variable made #score(:draft) 25 times faster
-    @tracked_matches = @tracked_matches || self.matches.select do |match|
+    @tracked_matches = @tracked_matches || self.my_matches.select do |match|
       match.complete &&
       match.game_type == "HeroLeague" &&
       match.game_date >= (Date.today - 90).strftime("%Y-%m-%d")

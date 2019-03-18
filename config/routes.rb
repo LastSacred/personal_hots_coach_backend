@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :maps, only: [:index]
 
   resources :heroes, only: [:index]
+
+  resources :replay_files, only: [:create]
 end
