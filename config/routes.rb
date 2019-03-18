@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   resources :heroes, only: [:index]
 
-  resources :replay_files, only: [:create]
+  resources :replay_files, only: [:index, :create]
 end

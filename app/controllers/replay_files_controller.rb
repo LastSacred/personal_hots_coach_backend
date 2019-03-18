@@ -1,10 +1,17 @@
 class ReplayFilesController < ApplicationController
-  before_action :authorize!, only: [:create]
+  before_action :authorize!, only: [:index, :create]
+
+  def index
+    @replay_files = current_user.replay_files
+
+    render json: @replay_files.to_json(only: :name), status: :ok
+  end
 
   def create
-    @replay_files = replay_file_params.collect do |file|
+    @replay_files = replay_file_params.each do |file|
       @file_name = file.original_filename
       @file = file.tempfile
+      @user = current_user
 
       match = Adapter.post_replay(@file)
       replay_id = (match["status"] == "AiDetected" ? nil : match["id"])
@@ -19,7 +26,7 @@ class ReplayFilesController < ApplicationController
       @replay_file
     end
 
-    render json: @replay_files.to_json, status: :create
+    render json: @replay_files.to_json, status: :created
   end
 
   private
