@@ -156,4 +156,11 @@ class UserTest < ActiveSupport::TestCase
     assert match.complete
   end
 
+  test '#fix_battletags' do
+    phil = users :DrPhil
+    phil.fix_battletags
+
+    brokenpick = hero_picks :brokenpick
+    assert_equal 'DrPhil#0003', brokenpick.picked_by
+  end
 end

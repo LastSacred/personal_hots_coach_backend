@@ -71,3 +71,11 @@ empty:
   game_type: HeroLeague
   map: alterac
   complete: true
+
+broken:
+  replay_id: 8
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-08).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true

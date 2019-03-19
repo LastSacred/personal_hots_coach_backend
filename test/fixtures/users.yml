@@ -27,3 +27,10 @@ foe:
   replay_path: /replaypath
   auto_roster: true
   password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
+
+DrPhil:
+  name: DrPhil
+  battletag: DrPhil#0003
+  replay_path: './test/replays/'
+  auto_roster: true
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS

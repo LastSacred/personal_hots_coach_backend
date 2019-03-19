@@ -95,3 +95,10 @@ starpick06:
   match: starmatch06
   hero: LiLi
   win: false
+
+brokenpick:
+  picked_by: DrPhil
+  team: 0
+  match: broken
+  hero: Azmodan
+  win: false

@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   validates :name, :battletag, uniqueness: true
   validates :name, :password_digest, :battletag, presence: true
-  
+
   def import
     Match.import(self.replay_path, self)
   end
@@ -91,7 +91,7 @@ class User < ApplicationRecord
 
     list.sort_by { |obj| obj[:score] }.reverse
   end
-  # TODO: write test for User#fix_battletags
+
   def fix_battletags
     Match.all.each do |match|
       hero_pick = match.hero_picks.find do |hero_pick|
