@@ -91,6 +91,20 @@ class User < ApplicationRecord
 
     list.sort_by { |obj| obj[:score] }.reverse
   end
+  # TODO: write test for User#fix_battletags
+  def fix_battletags
+    Match.all.each do |match|
+      hero_pick = match.hero_picks.find do |hero_pick|
+        hero_pick.picked_by == self.battletag.split('#').first
+      end
+
+      if hero_pick
+        hero_pick.update(picked_by: self.battletag)
+        match.update(complete: true)
+        puts "fixed battletag for #{match.replay_id}"
+      end
+    end
+  end
 
   private
 

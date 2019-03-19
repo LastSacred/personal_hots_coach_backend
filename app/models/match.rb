@@ -19,23 +19,24 @@ class Match < ApplicationRecord
     self.upload_replays(replay_path, user) if replay_path
 
     count = 0
-
-    while self.incomplete.present? && count < 3
+    while self.incomplete.present? && count < 2
       self.parse_matches
       count += 1
     end
+
+    user.fix_battletags if user
   end
 
   def self.upload_replays(replay_path, user=nil)
     Dir.glob(replay_path + "*.StormReplay") do |replay|
       file_name = replay.split("/").last
-      
+
       next if user && user.replay_files.find { |replay_file| replay_file.name == file_name }
-      # next if self.find_by(original_path: replay)
+      next if !user && self.find_by(original_path: replay)
 
       match_data = Adapter.post_replay(replay)
       replay_id = (match_data["status"] == "AiDetected" ? nil : match_data["id"])
-      match = Match.find_or_create_by(replay_id: replay_id)
+      match = Match.find_or_create_by(replay_id: replay_id).update(original_path: replay)
 
       ReplayFile.find_or_create_by( name: file_name, user: user, match: match) if user
 
