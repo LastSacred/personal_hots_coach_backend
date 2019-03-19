@@ -1,13 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "diablo" do
-  #   star = users :DavidBowie
-  #   lili = heroes :LiLi
-  #   diab = heroes :Diablo
-  #
-  #   assert_equal 0, star.score(as_hero: lili, against_hero: diab)
-  # end
 
   test "#roster=" do
     hero_names = [
@@ -54,24 +47,33 @@ class UserTest < ActiveSupport::TestCase
   test "#score as_hero" do
     star = users :DavidBowie
     lili = heroes :LiLi
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 540, star.score(as_hero: lili)
+    Date.stub :today, stub_date do
+      assert_equal 540, star.score(as_hero: lili)
+    end
   end
 
   test "#score as_hero with_hero" do
     star = users :DavidBowie
     lili = heroes :LiLi
     art = heroes :Artanis
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 678, star.score(as_hero: lili, with_hero: art)
+    Date.stub :today, stub_date do
+      assert_equal 678, star.score(as_hero: lili, with_hero: art)
+    end
   end
 
   test "#score as_hero on_map" do
     star = users :DavidBowie
     lili = heroes :LiLi
     alterac = maps :alterac
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 770, star.score(as_hero: lili, map: alterac)
+    Date.stub :today, stub_date do
+      assert_equal 770, star.score(as_hero: lili, map: alterac)
+    end
   end
 
   test "#score as_hero on_map with_hero" do
@@ -79,8 +81,11 @@ class UserTest < ActiveSupport::TestCase
     lili = heroes :LiLi
     art = heroes :Artanis
     alterac = maps :alterac
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 871, star.score(as_hero: lili, with_hero: art, map: alterac)
+    Date.stub :today, stub_date do
+      assert_equal 871, star.score(as_hero: lili, with_hero: art, map: alterac)
+    end
   end
 
   test "#score as_hero on_map against_hero" do
@@ -88,8 +93,11 @@ class UserTest < ActiveSupport::TestCase
     lili = heroes :LiLi
     meph = heroes :Mephisto
     alterac = maps :alterac
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 871, star.score(as_hero: lili, against_hero: meph, map: alterac)
+    Date.stub :today, stub_date do
+      assert_equal 871, star.score(as_hero: lili, against_hero: meph, map: alterac)
+    end
   end
 
   test "#score draft start" do
@@ -103,7 +111,11 @@ class UserTest < ActiveSupport::TestCase
       against_heroes: []
     }
 
-    assert_equal 770, star.score(as_hero: lili, draft: draft)
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 770, star.score(as_hero: lili, draft: draft)
+    end
   end
 
   test "#score draft later" do
@@ -122,7 +134,11 @@ class UserTest < ActiveSupport::TestCase
       against_heroes: [diab, meph, thrall]
     }
 
-    assert_equal 709, star.score(as_hero: lili, draft: draft)
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 709, star.score(as_hero: lili, draft: draft)
+    end
   end
 
   test "#pick_list" do
@@ -141,11 +157,15 @@ class UserTest < ActiveSupport::TestCase
       against_heroes: [diab, meph, thrall]
     }
 
-    pick_list = star.pick_list(draft)
+    stub_date = Date.new(2019, 3, 11)
 
-    assert_equal 1, pick_list.count
-    assert_equal lili, pick_list.first[:hero]
-    assert_equal 709, pick_list.first[:score]
+    Date.stub :today, stub_date do
+      pick_list = star.pick_list(draft)
+
+      assert_equal 1, pick_list.count
+      assert_equal lili, pick_list.first[:hero]
+      assert_equal 709, pick_list.first[:score]
+    end
   end
 
   test '#import' do

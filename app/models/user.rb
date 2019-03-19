@@ -101,7 +101,6 @@ class User < ApplicationRecord
       if hero_pick
         hero_pick.update(picked_by: self.battletag)
         match.update(complete: true)
-        puts "fixed battletag for #{match.replay_id}"
       end
     end
   end
