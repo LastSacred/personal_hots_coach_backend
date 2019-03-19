@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :battletag, :replay_path, roster: [])
+    params.require(:user).permit(:name, :password, :battletag, :auto_roster, heroes: [])
   end
 
 end
