@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :heroes, only: [:index]
 
   resources :replay_files, only: [:index, :create]
+
+  resources :matches, only: [:create]
 end
