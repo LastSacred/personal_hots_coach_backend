@@ -3,7 +3,7 @@
 BobRoss:
   name: BobRoss
   battletag: BobRoss#9999
-  replay_path: /replaypath
+  replay_path: './test/replays/'
   auto_roster: false
   password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
 

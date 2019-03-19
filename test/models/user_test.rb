@@ -148,4 +148,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 709, pick_list.first[:score]
   end
 
+  test '#import' do
+    bob = users :BobRoss
+    bob.import
+    match = Match.find_by(replay_id: 14319721)
+
+    assert match.complete
+  end
+
 end

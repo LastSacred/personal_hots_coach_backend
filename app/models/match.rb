@@ -36,7 +36,8 @@ class Match < ApplicationRecord
 
       match_data = Adapter.post_replay(replay)
       replay_id = (match_data["status"] == "AiDetected" ? nil : match_data["id"])
-      match = Match.find_or_create_by(replay_id: replay_id).update(original_path: replay)
+      match = Match.find_or_create_by(replay_id: replay_id)
+      match.update(original_path: replay)
 
       ReplayFile.find_or_create_by( name: file_name, user: user, match: match) if user
 
