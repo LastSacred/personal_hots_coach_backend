@@ -1,6 +1,6 @@
 class ReplayFilesController < ApplicationController
   before_action :authorize!, only: [:index, :create]
-
+  #TODO: Write tests for replayfilescontroller
   def index
     @replay_files = current_user.replay_files
 

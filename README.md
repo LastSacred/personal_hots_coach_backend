@@ -13,7 +13,3 @@
 ## History
 
   This is the successor to personal_hots_coach_cli, a command line only version of the application. This version is in development.
-
-## Todo
-
-TODO: search for c# ruby bindings to try to parse replays.

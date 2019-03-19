@@ -13,10 +13,10 @@ class Match < ApplicationRecord
     match.validates :heroes, length: {is: 10}
   end
 
-  def self.import(replay_path)
+  def self.import(replay_path=nil, user=nil)
     Map.import
     Hero.import
-    self.upload_replays(replay_path)
+    self.upload_replays(replay_path, user) if replay_path
 
     count = 0
 
@@ -26,17 +26,18 @@ class Match < ApplicationRecord
     end
   end
 
-  def self.upload_replays(replay_path)
+  def self.upload_replays(replay_path, user=nil)
     Dir.glob(replay_path + "*.StormReplay") do |replay|
-      next if self.find_by(original_path: replay)
+      file_name = replay.split("/").last
+      
+      next if user && user.replay_files.find { |replay_file| replay_file.name == file_name }
+      # next if self.find_by(original_path: replay)
 
-      match = Adapter.post_replay(replay)
+      match_data = Adapter.post_replay(replay)
+      replay_id = (match_data["status"] == "AiDetected" ? nil : match_data["id"])
+      match = Match.find_or_create_by(replay_id: replay_id)
 
-      if match["status"] == "AiDetected"
-        self.find_or_create_by(original_path: replay)
-      else
-        self.find_or_create_by(replay_id: match["id"]).update(original_path: replay)
-      end
+      ReplayFile.find_or_create_by( name: file_name, user: user, match: match) if user
 
       sleep(1.5)
     end

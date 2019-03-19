@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   validates :name, :battletag, uniqueness: true
   validates :name, :password_digest, :battletag, presence: true
+  # TODO: write test for User#import
+  def import
+    Match.import(self.replay_path, self)
+  end
 
   def roster=(hero_names)
     self.heroes = hero_names.map do |hero_name|
