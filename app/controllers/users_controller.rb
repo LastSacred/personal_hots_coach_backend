@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :authorize!, only: [:update]
+  before_action :authorize!, only: [:show, :update]
+
+  def show
+    @user = current_user
+    render json: @user.to_json(only: [:battletag, :auto_roster]), status: :ok
+  end
 
   def create
      @user = User.new(user_params)
@@ -13,7 +18,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-
     @user.assign_attributes(user_params)
 
     if @user.save

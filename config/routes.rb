@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post '/login', to: 'auth#create'
 
+  get '/users', to: 'users#show'
   patch '/users', to: 'users#update'
   resources :users, only: [:create]
 
