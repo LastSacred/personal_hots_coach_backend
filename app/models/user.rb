@@ -93,6 +93,8 @@ class User < ApplicationRecord
   end
 
   def fix_battletags
+    status = {}
+
     Match.all.each do |match|
       hero_pick = match.hero_picks.find do |hero_pick|
         hero_pick.picked_by == self.battletag.split('#').first
@@ -101,8 +103,13 @@ class User < ApplicationRecord
       if hero_pick
         hero_pick.update(picked_by: self.battletag)
         match.update(complete: true)
+
+        status[match.replay_id] = "parsed (fixed battletag)"
+        status[match.replay_id] = match.errors.full_messages if match.errors.full_messages.present?
       end
     end
+
+    status
   end
 
   private

@@ -14,20 +14,29 @@ class Match < ApplicationRecord
   end
 
   def self.import(replay_path=nil, user=nil)
+    status = {}
+
     Map.import
     Hero.import
-    self.upload_replays(replay_path, user) if replay_path
+    status.merge(self.upload_replays(replay_path, user)) if replay_path
 
     count = 0
     while self.incomplete.present? && count < 2
-      self.parse_matches
+      status.merge(self.parse_matches)
+      status.merge(user.fix_battletags) if user
       count += 1
     end
 
-    user.fix_battletags if user
+    status.each do |replay_id, value|
+      puts "#{replay_id}: #{value}"
+    end
+
+    puts "#{self.incomplete.count} incomplete matches" if self.incomplete.present?
   end
 
   def self.upload_replays(replay_path, user=nil)
+    status = {}
+
     Dir.glob(replay_path + "*.StormReplay") do |replay|
       file_name = replay.split("/").last
 
@@ -36,13 +45,24 @@ class Match < ApplicationRecord
 
       match_data = Adapter.post_replay(replay)
       replay_id = (match_data["status"] == "AiDetected" ? nil : match_data["id"])
-      match = Match.find_or_create_by(replay_id: replay_id)
+
+      if match = Match.find_by(replay_id: replay_id)
+        status[match.replay_id] = "associated with user"
+      else
+        match = Match.create(replay_id: replay_id)
+        status[match.replay_id] = "uploaded"
+      end
+
       match.update(original_path: replay)
 
       ReplayFile.find_or_create_by( name: file_name, user: user, match: match) if user
 
+      status[match.replay_id] = 'uploaded'
+
       sleep(1.5)
     end
+
+    status
   end
 
   private
@@ -54,6 +74,8 @@ class Match < ApplicationRecord
   end
 
   def self.parse_matches
+    status = {}
+
     self.incomplete.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
       ## I will put this back in if there are any errors caused by incomplete replays
@@ -71,14 +93,19 @@ class Match < ApplicationRecord
 
       HeroPick.match_picks(match, data["players"])
 
-      (data["processed"]) ? (match.update(complete: true)) : (puts "check #{match.replay_id}")
-
-      if match.errors.full_messages.present?
-        puts match.errors.full_messages
-        byebug
+      if data["processed"]
+        (match.update(complete: true))
+        status[match.replay_id] = 'parsed'
+      else
+        status[match.replay_id] = 'incomplete'
       end
+
+      status[match.replay_id] = match.errors.full_messages if match.errors.full_messages.present?
+
       sleep(1.5)
     end
+
+    status
   end
 
   def format_date
