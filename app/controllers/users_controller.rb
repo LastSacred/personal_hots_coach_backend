@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    render json: @user.to_json(only: [:battletag, :auto_roster]), status: :ok
+    render json: @user.to_json(only: [:battletag, :auto_roster], include: :heroes), status: :ok
   end
 
   def create
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :battletag, :auto_roster, heroes: [])
+    params.require(:user).permit(:name, :password, :battletag, :auto_roster, roster: [])
   end
 
 end
