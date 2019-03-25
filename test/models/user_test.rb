@@ -137,7 +137,7 @@ class UserTest < ActiveSupport::TestCase
     stub_date = Date.new(2019, 3, 11)
 
     Date.stub :today, stub_date do
-      assert_equal 709, star.score(as_hero: lili, draft: draft)
+      assert_equal 672, star.score(as_hero: lili, draft: draft)
     end
   end
 
@@ -164,7 +164,7 @@ class UserTest < ActiveSupport::TestCase
 
       assert_equal 1, pick_list.count
       assert_equal lili, pick_list.first[:hero]
-      assert_equal 709, pick_list.first[:score]
+      assert_equal 672, pick_list.first[:score]
     end
   end
 

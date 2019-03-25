@@ -63,7 +63,8 @@ class User < ApplicationRecord
     end
 
     if params[:draft]
-      min = 8
+      # I feel like this number needs tweaking
+      min = 4
       fill = self.score(as_hero: params[:as_hero], map: params[:draft][:map])
     elsif params[:map] && (params[:with_hero] || params[:against_hero])
       min = 5
