@@ -12,7 +12,7 @@
 
 ### Backend
 
-  This is the backend api for the application. Personal HotS Coach is also required.
+  This is the backend api for the application. Personal HotS Coach is also required. https://github.com/LastSacred/personal_hots_coach
 
 #### Ruby
 
@@ -37,3 +37,5 @@
   After creating your user, go into the backend directory and access the console with `rails console`.
   Type `User.find_by(name: <your_user_name>).update(replay_path: <path_to_your_hots_replay_files>)`.
   If this is set up properly, Personal HotS Coach will automatically check for new replay files ever time you load the draft page.
+
+  The import process uses http://hotsapi.net/ to parse replays.
