@@ -78,7 +78,7 @@ class Match < ApplicationRecord
 
     self.incomplete.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
-      byebug
+
       match.update(
         game_date: data["game_date"],
         game_type: data["game_type"],
