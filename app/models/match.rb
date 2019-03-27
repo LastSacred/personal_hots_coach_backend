@@ -78,13 +78,7 @@ class Match < ApplicationRecord
 
     self.incomplete.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
-      ## I will put this back in if there are any errors caused by incomplete replays
-      # if !data["processed"]
-      #   puts "skipping #{match.replay_id}"
-      #   sleep (1.5)
-      #   next
-      # end
-
+      byebug
       match.update(
         game_date: data["game_date"],
         game_type: data["game_type"],
