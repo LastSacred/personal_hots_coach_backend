@@ -39,3 +39,9 @@
   If this is set up properly, Personal HotS Coach will automatically check for new replay files ever time you load the draft page.
 
   The import process uses http://hotsapi.net/ to parse replays.
+
+## Created By
+
+  Arthur Torres (LastSacred)
+
+  arthurtorres002@gmail.com
