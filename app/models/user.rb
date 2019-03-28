@@ -28,7 +28,6 @@ class User < ApplicationRecord
     # assigning tracked_matches to an instance variable made #score(:draft) 25 times faster
     @tracked_matches = @tracked_matches || self.my_matches.select do |match|
       match.complete &&
-      match.game_type == "HeroLeague" &&
       match.game_date >= (Date.today - 90).strftime("%Y-%m-%d")
     end
 
