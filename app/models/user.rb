@@ -27,8 +27,11 @@ class User < ApplicationRecord
   def tracked_matches
     # assigning tracked_matches to an instance variable made #score(:draft) 25 times faster
     @tracked_matches = @tracked_matches || self.my_matches.select do |match|
-      match.complete &&
-      match.game_date >= (Date.today - 90).strftime("%Y-%m-%d")
+      match.game_date >= (Date.today - 90).strftime("%Y-%m-%d") &&
+      (self.track_quick_match || match.game_type != 'QuickMatch') &&
+      (self.track_unranked_draft || match.game_type != 'UnrankedDraft') &&
+      (self.track_ranked_draft || !match.game_type.include?('League')) &&
+      match.complete
     end
 
     @tracked_matches

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_191830) do
+ActiveRecord::Schema.define(version: 2019_04_11_131652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,9 @@ ActiveRecord::Schema.define(version: 2019_03_18_191830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.boolean "track_quick_match", default: false
+    t.boolean "track_unranked_draft", default: true
+    t.boolean "track_ranked_draft", default: true
   end
 
   add_foreign_key "hero_picks", "heroes"
