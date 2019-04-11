@@ -78,10 +78,10 @@ class Match < ApplicationRecord
 
     self.incomplete.each do |match|
       data = Adapter.get("replays/#{match.replay_id}")
-      # TODO: take out the manual StormLeague if hots api fixes the problem with it coming in as nil
+
       match.update(
         game_date: data["game_date"],
-        game_type: data["game_type"] || "StormLeague",
+        game_type: data["game_type"],
         map: Map.find_by(name: data["game_map"])
       )
 
@@ -92,8 +92,6 @@ class Match < ApplicationRecord
         status[match.replay_id] = 'parsed'
       else
         status[match.replay_id] = 'incomplete'
-        # this line is also here to fix the issue with StormLeague matches not processing
-        status[match.replay_id] = 'parsed' if match.game_type == "StormLeague" && match.update(complete: true)
       end
 
       status[match.replay_id] = match.errors.full_messages if match.errors.full_messages.present?
