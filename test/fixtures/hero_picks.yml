@@ -102,3 +102,45 @@ brokenpick:
   match: broken
   hero: Azmodan
   win: false
+
+nofun09:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun09
+  hero: Malfurion
+  win: false
+
+nofun10:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun10
+  hero: Malfurion
+  win: false
+
+nofun11:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun11
+  hero: Malfurion
+  win: false
+
+nofun12:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun12
+  hero: Malfurion
+  win: false
+
+nofun13:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun13
+  hero: Malfurion
+  win: false
+
+nofun14:
+  picked_by: MrNoFun#0004
+  team: 0
+  match: nofun14
+  hero: Malfurion
+  win: false

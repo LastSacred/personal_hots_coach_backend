@@ -79,3 +79,51 @@ broken:
   game_type: HeroLeague
   map: alterac
   complete: true
+
+nofun09:
+  replay_id: 9
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-09).StormReplay
+  game_type: QuickMatch
+  map: alterac
+  complete: true
+
+nofun10:
+  replay_id: 10
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-10).StormReplay
+  game_type: UnrankedDraft
+  map: alterac
+  complete: true
+
+nofun11:
+  replay_id: 11
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-11).StormReplay
+  game_type: HeroLeague
+  map: alterac
+  complete: true
+
+nofun12:
+  replay_id: 12
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-12).StormReplay
+  game_type: TeamLeague
+  map: alterac
+  complete: true
+
+nofun13:
+  replay_id: 13
+  game_date: "2019-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-13).StormReplay
+  game_type: StormLeague
+  map: alterac
+  complete: true
+
+nofun14:
+  replay_id: 14
+  game_date: "2018-01-28"
+  original_path: ./test/replays/Battlefield of Eternity (-14).StormReplay
+  game_type: StormLeague
+  map: alterac
+  complete: true

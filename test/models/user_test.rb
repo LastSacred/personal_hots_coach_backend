@@ -21,12 +21,42 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 2, bob.my_matches.count
   end
 
-  test "#tracked_matches" do
-    bob = users :BobRoss
+  test "#tracked_matches none" do
+    mrnofun = users :MrNoFun
     stub_date = Date.new(2019, 3, 11)
 
     Date.stub :today, stub_date do
-      assert_equal 1, bob.tracked_matches.count
+      assert_equal 0, mrnofun.tracked_matches.count
+    end
+  end
+
+  test "#tracked_matches quick_match" do
+    mrnofun = users :MrNoFun
+    mrnofun.update(track_quick_match: true)
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 1, mrnofun.tracked_matches.count
+    end
+  end
+
+  test "#tracked_matches unranked_draft" do
+    mrnofun = users :MrNoFun
+    mrnofun.update(track_unranked_draft: true)
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 1, mrnofun.tracked_matches.count
+    end
+  end
+
+  test "#tracked_matches ranked_draft" do
+    mrnofun = users :MrNoFun
+    mrnofun.update(track_ranked_draft: true)
+    stub_date = Date.new(2019, 3, 11)
+
+    Date.stub :today, stub_date do
+      assert_equal 3, mrnofun.tracked_matches.count
     end
   end
 

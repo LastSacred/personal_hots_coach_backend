@@ -34,3 +34,13 @@ DrPhil:
   replay_path: './test/replays/'
   auto_roster: true
   password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
+
+MrNoFun:
+  name: MrNoFun
+  battletag: MrNoFun#0004
+  replay_path: './test/replays/'
+  auto_roster: true
+  track_quick_match: false
+  track_unranked_draft: false
+  track_ranked_draft: false
+  password_digest: $2a$10$xbsDvmdR59Wl9tm94kphoOeXRsFvOtEFV.bfv1UoF.i0AOLp0xUPS
