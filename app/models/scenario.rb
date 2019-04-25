@@ -10,7 +10,7 @@ class Scenario
 
     get_scores
 
-    @win_percent = @scores.sum / @scores.count / 10
+    @win_percent = @scores.count > 0 ? @scores.sum / @scores.count / 10 : nil
 
     fill_scores
 
@@ -37,7 +37,7 @@ class Scenario
 
   def get_matches
     return @matches = [] if @params[:draft]
-    
+
     matches = @params[:user].tracked_matches.select { |match| @params[:user].my_pick(match).hero == @params[:as_hero] }
     matches = matches.select { |match| match.map == @params[:map] } if @params[:map]
     matches = filter_by_hero(matches)

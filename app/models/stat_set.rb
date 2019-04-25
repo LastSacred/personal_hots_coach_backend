@@ -1,12 +1,15 @@
 class StatSet
-  attr_reader :user, :hero, :total_score, :total_win_percent, :match_count, :best_with, :best_against, :best_on
+  attr_reader :user, :hero, :score, :win_percent, :match_count, :best_with, :best_against, :best_on
 
   def initialize(user, hero)
     @user = user
     @hero = hero
-    @total_score = @user.score(as_hero: @hero)
-    @total_win_percent = 'win%'
-    @match_count = 'match#'
+
+    scenario = Scenario.new(user: @user, as_hero: @hero)
+
+    @score = scenario.score
+    @win_percent = scenario.win_percent
+    @match_count = scenario.match_count
     @best_with = best(:with_hero)
     @best_against = best(:against_hero)
     @best_on = best(:map)
@@ -15,16 +18,24 @@ class StatSet
   def best(target)
     if target == :map
       list = Map.actual.collect do |map|
+        scenario = Scenario.new(user: @user, as_hero: @hero, target => map)
+
         {
           map: map,
-          score: @user.score(as_hero: @hero, target => map)
+          score: scenario.score,
+          win_percent: scenario.win_percent,
+          match_count: scenario.match_count
         }
       end
     else
       list = Hero.all.collect do |hero|
+        scenario = Scenario.new(user: @user, as_hero: @hero, target => hero)
+
         {
           hero: hero,
-          score: @user.score(as_hero: @hero, target => hero)
+          score: scenario.score,
+          win_percent: scenario.win_percent,
+          match_count: scenario.match_count
         }
       end
     end
