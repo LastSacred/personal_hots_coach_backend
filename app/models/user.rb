@@ -114,6 +114,14 @@ class User < ApplicationRecord
     status
   end
 
+  def my_team(match)
+    my_pick(match).team
+  end
+
+  def my_pick(match)
+    match.hero_picks.find{ |hero_pick| hero_pick.picked_by == self.battletag }
+  end
+
   private
 
   def matches_as(hero)
@@ -139,14 +147,6 @@ class User < ApplicationRecord
         )
       end
     end
-  end
-
-  def my_team(match)
-    my_pick(match).team
-  end
-
-  def my_pick(match)
-    match.hero_picks.find{ |hero_pick| hero_pick.picked_by == self.battletag }
   end
 
   def auto_heroes
