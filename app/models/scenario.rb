@@ -3,17 +3,11 @@ class Scenario
 
   def initialize(**params)
     @params = params
-
     get_matches
-
     @match_count = @matches.count
-
     get_scores
-
     @win_percent = @scores.count > 0 ? @scores.sum / @scores.count / 10 : nil
-
     fill_scores
-
     @score = @scores.sum / @scores.count
   end
 
@@ -72,7 +66,7 @@ class Scenario
     elsif @params[:map] && (@params[:with_hero] || @params[:against_hero])
       min = 5
       fill = Scenario.new(user: @params[:user], as_hero: @params[:as_hero], with_hero: @params[:with_hero]).score if @params[:with_hero]
-      fill = Scenario.new(user: @params[:user], as_hero: @params[:as_hero], against_hero: @params[:against_hero]) if @params[:against_hero]
+      fill = Scenario.new(user: @params[:user], as_hero: @params[:as_hero], against_hero: @params[:against_hero]).score if @params[:against_hero]
     elsif @params[:map] || @params[:with_hero] || @params[:against_hero]
       min = 10
       fill = Scenario.new(user: @params[:user], as_hero: @params[:as_hero]).score
