@@ -7,4 +7,20 @@ class Map < ApplicationRecord
     end
   end
 
+  def self.actual
+    excluded = [
+      "Braxis Outpost",
+      "Checkpoint: Hanamura",
+      "Escape From Braxis",
+      "Industrial District",
+      "Lost Cavern",
+      "Pull Party",
+      "Silver City",
+    ]
+
+    Map.all.reject do |map|
+      excluded.include?(map.name)
+    end
+  end
+
 end
