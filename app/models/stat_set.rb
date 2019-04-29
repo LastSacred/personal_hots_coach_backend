@@ -1,8 +1,15 @@
 class StatSet
-  attr_reader :user, :hero, :score, :win_percent, :match_count, :best_with, :best_against, :best_on
+  attr_reader :user, :hero, :score, :win_percent, :match_count, :best_with, :best_against, :best_on, :hero_sets
 
-  def initialize(user, hero)
+  def initialize(user, hero=nil)
     @user = user
+
+    if !hero
+      return @hero_sets = user.heroes.collect do |hero|
+        StatSet.new(@user, hero)
+      end
+    end
+
     @hero = hero
 
     scenario = Scenario.new(user: @user, as_hero: @hero)
