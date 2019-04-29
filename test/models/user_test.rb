@@ -69,9 +69,12 @@ class UserTest < ActiveSupport::TestCase
   test "#roster auto" do
     bob = users :BobRoss
     bob.auto_roster = true
+    stub_date = Date.new(2019, 3, 11)
 
-    assert bob.roster.find{ |hero| hero.name == "Li Li" }
-    assert_equal 1, bob.roster.count
+    Date.stub :today, stub_date do
+      assert bob.roster.find{ |hero| hero.name == "Li Li" }
+      assert_equal 1, bob.roster.count
+    end
   end
 
   test "#pick_list" do
