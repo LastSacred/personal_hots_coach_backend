@@ -1,10 +1,10 @@
 class StatsetsController < ApplicationController
-  before_action :authorize!
+  before_action :authorize!, only: [:show]
 
   def show
     @user = current_user
     @statset = StatSet.new(@user)
-    # FIXME: unable to send only hero_sets
+
     render json: @statset.to_json, status: :ok
   end
 
