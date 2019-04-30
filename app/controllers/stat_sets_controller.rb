@@ -1,4 +1,4 @@
-class StatsetsController < ApplicationController
+class StatSetsController < ApplicationController
   before_action :authorize!, only: [:show]
 
   def show

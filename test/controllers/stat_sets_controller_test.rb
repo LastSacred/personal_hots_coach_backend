@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class StatsetsControllerTest < ActionDispatch::IntegrationTest
+class StatSetsControllerTest < ActionDispatch::IntegrationTest
   test "show" do
     bob = User.find_by(name: "BobRoss")
     token = JWT.encode({userId: bob.id}, ENV['SECRET'])
 
-    get statsets_url, headers: {
+    get stat_sets_url, headers: {
       "Access-Token": token
     }
 

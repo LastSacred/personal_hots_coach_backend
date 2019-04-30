@@ -10,5 +10,6 @@ class ReplayFilesControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :ok
+    # TODO write test for replay_files#create
   end
 end

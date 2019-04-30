@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   patch '/users', to: 'users#update'
   resources :users, only: [:create]
 
-  get '/statsets', to: 'statsets#show'
+  get '/stat_sets', to: 'stat_sets#show'
 
   resources :drafts, only: [:create]
 
