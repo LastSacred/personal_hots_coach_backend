@@ -49,5 +49,4 @@ class StatSet
 
     list.sort_by { |obj| obj[:score] }.reverse
   end
-
 end
