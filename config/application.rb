@@ -23,6 +23,16 @@ module PersonalHotsCoachBackend
     config.load_defaults 5.2
     config.autoload_paths << Rails.root.join('app/models/helpers')
 
+    # Keeps applicatin awake on a server that sleeps when unused
+    config.after_initialize do
+      Thread.new do
+        loop do
+          sleep(600)
+          Adapter.stay_awake
+        end
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
