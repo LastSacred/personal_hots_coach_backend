@@ -7,7 +7,7 @@ class Hero < ApplicationRecord
   before_validation :format_role
 
   validates :name, uniqueness: true
-
+  # TODO: write method to update a hero if it has change
   def self.import
     Adapter.get("heroes").each do |hero|
       self.find_or_create_by(
