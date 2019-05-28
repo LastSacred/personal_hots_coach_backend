@@ -3,9 +3,11 @@ class StatSet
 
   def initialize(user, hero=nil)
     if !hero
-      return @hero_sets = user.heroes.collect do |hero|
+      hero_sets = user.heroes.collect do |hero|
         StatSet.new(user, hero)
       end
+
+      return @hero_sets = hero_sets.sort_by { |hero_set| hero_set.score }.reverse
     end
 
     @hero = hero
