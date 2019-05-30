@@ -1,10 +1,10 @@
 class StatSet
   attr_reader :hero, :score, :win_percent, :match_count, :best_with, :best_against, :best_on, :hero_sets
 
-  def initialize(user, hero=nil)
+  def initialize(user, hero=nil, min=false)
     if !hero
       hero_sets = user.heroes.collect do |hero|
-        StatSet.new(user, hero)
+        StatSet.new(user, hero, :min)
       end
 
       return @hero_sets = hero_sets.sort_by { |hero_set| hero_set.score }.reverse
@@ -17,9 +17,13 @@ class StatSet
     @score = scenario.score
     @win_percent = scenario.win_percent
     @match_count = scenario.match_count
-    @best_with = best(user, :with_hero)
-    @best_against = best(user, :against_hero)
-    @best_on = best(user, :map)
+
+    if !min
+      @best_with = best(user, :with_hero)
+      @best_against = best(user, :against_hero)
+      @best_on = best(user, :map)
+    end
+
   end
 
   def best(user, target)
